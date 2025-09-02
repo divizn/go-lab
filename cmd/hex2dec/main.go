@@ -1,17 +1,53 @@
 package main
 
 import (
+	"bufio"
+	"errors"
 	"fmt"
+	"log"
 	"math"
+	"os"
+	"strconv"
+	"strings"
 )
 
+var errBadHex = errors.New("bad hex")
+
 func main() {
-	hex := "DCBA4255"
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Println("Please enter a hex number to convert (type q to quit)")
 
-	fmt.Println(HexToDecimal(hex))
+	for {
+		fmt.Print("> ")
+		if !scanner.Scan() {
+			break
+		}
+		line := scanner.Text()
+		tokens := strings.Fields(line)
 
+		if len(tokens) != 1 {
+			fmt.Println("Please enter exactly one value")
+			continue
+		}
+
+		hex := tokens[0]
+		if hex == "q" {
+			break
+		}
+		hex, err := validateHex(hex)
+		if err != nil {
+			if errors.Is(err, errBadHex) {
+				fmt.Println("Please enter a valid hexadecimal number")
+				continue
+			}
+			log.Fatal(err)
+		}
+
+		fmt.Printf("Your decimal number for %s is %d\n\n", hex, HexToDecimal(hex))
+	}
 }
 
+// Converts hex number to decimal
 func HexToDecimal(num string) int {
 	sum := 0
 
@@ -39,4 +75,15 @@ func HexToDecimal(num string) int {
 	}
 
 	return sum
+}
+
+// Validates hex number and returns the parsed hex number.
+func validateHex(hex string) (string, error) {
+	hex = strings.ToUpper(hex)
+
+	if _, err := strconv.ParseUint(hex, 16, 64); err != nil {
+		return "", fmt.Errorf("error during parsing hex: %w", errBadHex)
+	}
+
+	return hex, nil
 }
