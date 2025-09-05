@@ -9,10 +9,13 @@ web-server: # Run web-server with Air
 	./run_air.sh web-server
 
 
-hex2dec: # Run hex converter with Air
-	@echo "Starting CLI tool with Air..."
+hex2dec: # Run hex2dec with Air
+	@echo "Starting hex2dec tool with Air..."
 	./run_air.sh hex2dec
 
+dec2bin: # Run dec2bin with Air
+	@echo "Starting dec2bin with Air..."
+	./run_air.sh dec2bin
 
 
 clean: # Clean built binaries
