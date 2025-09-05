@@ -9,13 +9,13 @@ web-server: # Run web-server with Air
 	./run_air.sh web-server
 
 
-hex2dec: # Run hex2dec with Air
-	@echo "Starting hex2dec tool with Air..."
-	./run_air.sh hex2dec
+hex2dec: # Run hex2dec
+	@echo "Starting hex2dec..."
+	go run cmd/hex2dec/main.go
 
-dec2bin: # Run dec2bin with Air
-	@echo "Starting dec2bin with Air..."
-	./run_air.sh dec2bin
+dec2bin: # Run dec2bin
+	@echo "Starting dec2bin..."
+	go run cmd/dec2bin/main.go
 
 
 clean: # Clean built binaries
