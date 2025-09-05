@@ -52,7 +52,6 @@ func DecimalToBinary(num uint64) string {
 	}
 	var res []byte
 	for num > 0 {
-		fmt.Println(num)
 		if num%2 == 0 {
 			res = append(res, '0')
 		} else {
