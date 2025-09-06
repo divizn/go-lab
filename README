@@ -1,0 +1,25 @@
+GO-LAB
+
+Go-Lab is a personal playground for experimenting with Go. It contains small projects, utilities, and experiments that explore different features of the language, including web servers, CLI tools, file handling, and more.
+
+Project Structure
+-----------------
+- cmd/        : Entry points for different binaries (webserver, CLI tools, etc.)
+- pkg/        : Reusable packages and utilities shared across binaries (e.g., utils/)
+- .air.toml   : Air configuration for live reload during development
+- run_air.sh  : Script to run Air with a specific target binary
+- Makefile    : Convenient commands for building and running binaries
+- .gitignore  : Files and directories ignored by Git
+
+Getting Started
+---------------
+Run `make help` to see available commands for building and running binaries.
+
+Notes
+-----
+- The project is intended for learning and experimenting — not production use.
+- Contributions are welcome if they improve experiments or add interesting Go features.
+
+License
+-------
+MIT License
