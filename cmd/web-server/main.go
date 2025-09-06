@@ -6,11 +6,11 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/divizn/go-lab/pkg/utils"
+	files "github.com/divizn/go-lab/pkg"
 )
 
 func main() {
-	staticDir, err := utils.JoinWithCWD("cmd/web-server/static")
+	staticDir, err := files.JoinWithCWD("cmd/web-server/static")
 	if err != nil {
 		panic(err)
 	}
