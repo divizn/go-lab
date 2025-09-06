@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	files "github.com/divizn/go-lab/pkg"
+	"github.com/divizn/go-lab/pkg/files"
 )
 
 func main() {
