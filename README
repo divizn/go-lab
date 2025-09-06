@@ -5,7 +5,7 @@ Go-Lab is a personal playground for experimenting with Go. It contains small pro
 Project Structure
 -----------------
 - cmd/        : Entry points for different binaries (webserver, CLI tools, etc.)
-- pkg/        : Reusable packages and utilities shared across binaries (e.g., utils/)
+- pkg/        : Reusable packages and utilities shared across binaries)
 - .air.toml   : Air configuration for live reload during development
 - run_air.sh  : Script to run Air with a specific target binary
 - Makefile    : Convenient commands for building and running binaries
