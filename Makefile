@@ -27,6 +27,10 @@ metafile: # Run metafile - 2 optional arguments COMMAND and FILES e.g. `make met
 		go run cmd/metafile/main.go $(COMMAND) $$f; \
 	done
 
+oauth: # Run oauth
+	@echo "Starting oauth"
+	go run cmd/oauth/main.go\
+
 
 clean: # Clean built binaries
 	@echo "Cleaning tmp directory..."
