@@ -61,5 +61,6 @@ var userTemplate = `
 <p><strong>Name:</strong> {{.Name}}</p>
 <p><strong>Email:</strong> {{.Email}}</p>
 <p><strong>UserID:</strong> {{.UserID}}</p>
+<p><strong>IDToken</strong> {{.IDToken}}</p>
 <p><strong>Avatar:</strong><br><img src="{{.AvatarURL}}" alt="Avatar" width="100" /></p>
 <a href="/logout">Logout</a>`
