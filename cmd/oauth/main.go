@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 
@@ -12,7 +13,6 @@ import (
 	"github.com/markbates/goth/providers/discord"
 	"github.com/markbates/goth/providers/github"
 	"github.com/markbates/goth/providers/google"
-	"github.com/markbates/goth/providers/spotify"
 )
 
 func main() {
@@ -20,7 +20,6 @@ func main() {
 
 	goth.UseProviders(
 		google.New(cfg.GOOGLE_KEY, cfg.GOOGLE_SECRET, "http://localhost:3000/auth/google/callback"),
-		spotify.New(cfg.SPOTIFY_KEY, cfg.SPOTIFY_SECRET, "http://localhost:3000/auth/spotify/callback"),
 		github.New(cfg.GITHUB_KEY, cfg.GITHUB_SECRET, "http://localhost:3000/auth/github/callback"),
 		discord.New(cfg.DISCORD_KEY, cfg.DISCORD_SECRET, "http://localhost:3000/auth/discord/callback", discord.ScopeIdentify, discord.ScopeEmail, "openid"),
 	)
@@ -37,17 +36,14 @@ func main() {
 			return
 		}
 
-		fmt.Fprintf(w, "Login successful!\n\n")
-		fmt.Fprintf(w, "Provider: %s\n", user.Provider)
-		fmt.Fprintf(w, "UserID: %s\n", user.UserID)
-		fmt.Fprintf(w, "Name: %s\n", user.Name)
-		fmt.Fprintf(w, "Email: %s\n", user.Email)
-		fmt.Fprintf(w, "AccessToken: %s\n", user.AccessToken)
-
-		// TODO: fix openid connect for google
-		if user.IDToken != "" {
-			fmt.Fprintf(w, "IDToken: %s\n", user.IDToken)
+		tmpl, err := template.New("user").Parse(userTemplate)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
+
+		w.Header().Set("Content-Type", "text/html")
+		tmpl.Execute(w, user)
 	})
 
 	r.HandleFunc("/logout", func(w http.ResponseWriter, r *http.Request) {
@@ -58,3 +54,12 @@ func main() {
 	fmt.Println("Server running at http://localhost:3000")
 	log.Fatal(http.ListenAndServe(":3000", r))
 }
+
+var userTemplate = `
+<h2>User Info</h2>
+<p><strong>Provider:</strong> {{.Provider}}</p>
+<p><strong>Name:</strong> {{.Name}}</p>
+<p><strong>Email:</strong> {{.Email}}</p>
+<p><strong>UserID:</strong> {{.UserID}}</p>
+<p><strong>Avatar:</strong><br><img src="{{.AvatarURL}}" alt="Avatar" width="100" /></p>
+<a href="/logout">Logout</a>`
