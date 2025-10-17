@@ -17,6 +17,8 @@ type Config struct {
 	DISCORD_KEY string `env:"DISCORD_KEY,notEmpty"`
 	GITHUB_KEY  string `env:"GITHUB_KEY,notEmpty"`
 	SPOTIFY_KEY string `env:"SPOTIFY_KEY,notEmpty"`
+
+	SESSION_SECRET string `env:"SESSION_SECRET,notEmpty"`
 }
 
 var Cfg Config
