@@ -21,7 +21,7 @@ func main() {
 	goth.UseProviders(
 		google.New(cfg.GOOGLE_KEY, cfg.GOOGLE_SECRET, "http://localhost:3000/auth/google/callback"),
 		github.New(cfg.GITHUB_KEY, cfg.GITHUB_SECRET, "http://localhost:3000/auth/github/callback"),
-		discord.New(cfg.DISCORD_KEY, cfg.DISCORD_SECRET, "http://localhost:3000/auth/discord/callback", discord.ScopeIdentify, discord.ScopeEmail, "openid"),
+		discord.New(cfg.DISCORD_KEY, cfg.DISCORD_SECRET, "http://localhost:3000/auth/discord/callback", discord.ScopeIdentify, discord.ScopeEmail),
 	)
 	r := mux.NewRouter()
 
